@@ -1,0 +1,30 @@
+diff -Nur poky-dizzy-12.0.0.orig/meta/classes/distutils3-base.bbclass poky-dizzy-12.0.0/meta/classes/distutils3-base.bbclass
+--- poky-dizzy-12.0.0.orig/meta/classes/distutils3-base.bbclass	2014-10-28 22:31:06.000000000 +0000
++++ poky-dizzy-12.0.0/meta/classes/distutils3-base.bbclass	2014-12-11 21:10:16.034257942 +0000
+@@ -1,7 +1,7 @@
+ DEPENDS  += "${@["${PYTHON_PN}-native ${PYTHON_PN}", ""][(d.getVar('PACKAGES', True) == '')]}"
+ RDEPENDS_${PN} += "${@['', '${PYTHON_PN}-core']['${CLASSOVERRIDE}' == 'class-target']}"
+ 
+-PYTHON_BASEVERSION = "3.3"
++PYTHON_BASEVERSION = "3.4"
+ PYTHON_ABI = "m"
+ 
+ inherit distutils-common-base python3native
+diff -Nur poky-dizzy-12.0.0.orig/meta/classes/distutils3-native-base.bbclass poky-dizzy-12.0.0/meta/classes/distutils3-native-base.bbclass
+--- poky-dizzy-12.0.0.orig/meta/classes/distutils3-native-base.bbclass	2014-10-28 22:31:06.000000000 +0000
++++ poky-dizzy-12.0.0/meta/classes/distutils3-native-base.bbclass	2014-12-11 21:10:16.034257942 +0000
+@@ -1,4 +1,4 @@
+-PYTHON_BASEVERSION = "3.3"
++PYTHON_BASEVERSION = "3.4"
+ PYTHON_ABI = "m"
+ 
+ inherit distutils-native-base
+diff -Nur poky-dizzy-12.0.0.orig/meta/classes/python3native.bbclass poky-dizzy-12.0.0/meta/classes/python3native.bbclass
+--- poky-dizzy-12.0.0.orig/meta/classes/python3native.bbclass	2014-10-28 22:31:06.000000000 +0000
++++ poky-dizzy-12.0.0/meta/classes/python3native.bbclass	2014-12-11 21:10:16.100925952 +0000
+@@ -1,4 +1,4 @@
+-PYTHON_BASEVERSION = "3.3"
++PYTHON_BASEVERSION = "3.4"
+ 
+ inherit python-dir
+ 
