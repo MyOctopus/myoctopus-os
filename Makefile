@@ -12,8 +12,7 @@ YOCTO_DIR = $(YOCTO_NAME)
 	wget -c http://downloads.yoctoproject.org/releases/yocto/yocto-$(YOCTO_VER)/$(YOCTO_NAME).tar.bz2
 	tar xjf $(YOCTO_NAME).tar.bz2
 	ln -sf /usr/bin/python2 $(YOCTO_DIR)/bitbake/bin/python
-	# some hacks due to broken python support in yocto
-	#patch -p1 -d $(YOCTO_DIR) < distro/poky-dizzy-12.0.0-python.patch
+	patch -p1 -d $(YOCTO_DIR) < $(YOCTO_NAME)-python.patch
 	touch .os-fetch-stamp
 
 .os-edison-stamp: .os-fetch-stamp
