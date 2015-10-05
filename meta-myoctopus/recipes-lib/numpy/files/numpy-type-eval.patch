@@ -1,0 +1,14 @@
+--- numpy-1.10.0rc2/numpy/core/numerictypes.py.orig	2015-10-03 13:40:37.106433062 +0100
++++ numpy-1.10.0rc2/numpy/core/numerictypes.py	2015-10-03 13:40:43.236562958 +0100
+@@ -219,10 +219,7 @@
+         if ch in '0123456789':
+             break
+         k += 1
+-    try:
+-        bits = int(name[k:])
+-    except ValueError:
+-        bits = 0
++    bits = 0 if k >= len(name) else int(name[k:])
+     base = name[:k]
+     return base, bits
+ 
