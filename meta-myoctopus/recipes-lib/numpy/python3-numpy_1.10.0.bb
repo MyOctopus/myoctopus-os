@@ -71,7 +71,6 @@ do_compile_prepend_class-target() {
     # FIXME
     export LDFLAGS="-Lbuild/temp.linux-x86_64-3.4"
     export CPPFLAGS="-Ibuild/src.linux-x86_64-3.4/numpy/core/src/umath"
-    echo ${FC}
 
     BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
     ${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN} setup.py build ${DISTUTILS_BUILD_ARGS} || \
@@ -81,8 +80,8 @@ do_compile_prepend_class-target() {
 
 FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib/*.a"
 
-SRC_URI[md5sum] = "d2367add7f1903cca37d1eb7b2e9edd4"
-SRC_URI[sha256sum] = "d6fb3428554fa8d1b4f4882947e9bfb5380fe240bba4f797b2f778ead236221b"
+SRC_URI[md5sum] = "116c65ae392e9b50aad713f42158f32a"
+SRC_URI[sha256sum] = "43b00f5d52b374a731444ba2724bfa1debdbc93312a1b9b28e99700498d169b6"
 
 # install what is needed for numpy.test()
 RDEPENDS_${PN} = "python3-unittest \
