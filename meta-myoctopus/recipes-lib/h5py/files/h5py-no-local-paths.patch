@@ -1,0 +1,13 @@
+--- h5py-2.5.0/setup_build.py.orig	2015-10-06 20:01:34.154761955 +0100
++++ h5py-2.5.0/setup_build.py	2015-10-06 20:02:33.279322776 +0100
+@@ -46,8 +46,8 @@
+ else:
+     COMPILER_SETTINGS = {
+        'libraries'      : ['hdf5', 'hdf5_hl'],
+-       'include_dirs'   : [localpath('lzf'), '/opt/local/include', '/usr/local/include'],
+-       'library_dirs'   : ['/opt/local/lib', '/usr/local/lib'],
++       'include_dirs'   : [localpath('lzf')],
++       'library_dirs'   : [],
+        'define_macros'  : [('H5_USE_16_API', None)] }
+ 
+ 
