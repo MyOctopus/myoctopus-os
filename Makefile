@@ -8,6 +8,8 @@ MACHINE ?= edison
 YOCTO_NAME = poky-fido-13.0.0
 YOCTO_DIR = $(YOCTO_NAME)
 
+EDISON_IMAGE = edison-image-ww25.5-15
+
 .os-fetch-stamp:
 	wget -c http://downloads.yoctoproject.org/releases/yocto/yocto-$(YOCTO_VER)/$(YOCTO_NAME).tar.bz2
 	tar xjf $(YOCTO_NAME).tar.bz2
@@ -37,6 +39,16 @@ all: .os-myoctopus-init-stamp
 		bitbake core-image-minimal-edison
 	mkdir -p dist
 	ln -sf ../$(YOCTO_DIR)/build-myoctopus/tmp/deploy/images dist
+
+.os-edison-firmware-stamp:
+	wget -c http://downloadmirror.intel.com/25028/eng/$(EDISON_IMAGE).zip
+	mkdir -p $(EDISON_IMAGE)
+	unzip -d $(EDISON_IMAGE) $(EDISON_IMAGE).zip
+	touch .os-edison-firmware-stamp
+
+flash: .os-edison-firmware-stamp
+	cp dist/images/edison/core-image-minimal-edison-edison.ext4 $(EDISON_IMAGE)/edison-image-edison.ext4 
+	cd $(EDISON_IMAGE); sudo ./flashall.sh
 
 clean:
 	rm -rf .os-*-stamp
