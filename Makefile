@@ -42,12 +42,18 @@ all: .os-myoctopus-init-stamp
 
 .os-edison-firmware-stamp:
 	wget -c http://downloadmirror.intel.com/25028/eng/$(EDISON_IMAGE).zip
-	mkdir -p $(EDISON_IMAGE)
-	unzip -d $(EDISON_IMAGE) $(EDISON_IMAGE).zip
+	mkdir -p $(EDISON_IMAGE)/rootfs
+	unzip -o -d $(EDISON_IMAGE) $(EDISON_IMAGE).zip
+	sudo mount -o loop $(EDISON_IMAGE)/edison-image-edison.ext4 $(EDISON_IMAGE)/rootfs
+	tar pczf $(EDISON_IMAGE)/modules-kernel.tar.gz $(EDISON_IMAGE)/rootfs/lib/modules
+	sudo umount $(EDISON_IMAGE)/rootfs
 	touch .os-edison-firmware-stamp
 
 flash: .os-edison-firmware-stamp
-	cp dist/images/edison/core-image-minimal-edison-edison.ext4 $(EDISON_IMAGE)/edison-image-edison.ext4 
+	cp dist/images/edison/core-image-minimal-edison-edison.ext4 $(EDISON_IMAGE)/edison-image-edison.ext4
+	sudo mount -o loop $(EDISON_IMAGE)/edison-image-edison.ext4 $(EDISON_IMAGE)/rootfs
+	sudo tar xzf $(EDISON_IMAGE)/modules-kernel.tar.gz
+	sudo umount $(EDISON_IMAGE)/rootfs
 	cd $(EDISON_IMAGE); sudo ./flashall.sh
 
 clean:
